@@ -7,6 +7,12 @@
     :key="resource.name"
   >
     <q-list>
+      <q-item clickable v-ripple :to="resource.name">
+        <q-item-section>{{ $t('Show all') }}</q-item-section>
+      </q-item>
+      <q-item clickable v-ripple :to="`${resource.name}/create`">
+        <q-item-section>{{ $t('Create') }}</q-item-section>
+      </q-item>
     </q-list>
   </q-expansion-item>
 </template>

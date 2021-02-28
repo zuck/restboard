@@ -27,6 +27,12 @@ Please open a new issue on:
 
 https://github.com/zuck/restboard/issues
 
+## Acknowledgements
+
+This project is inspired by:
+
+* [react-admin](https://github.com/marmelab/react-admin)
+
 ## License
 
 Copyright (c) Emanuele Bertoldi
