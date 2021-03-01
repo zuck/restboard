@@ -21,6 +21,13 @@ function createRoutes (store) {
           }
         },
         {
+          path: 'create',
+          component: () => import('pages/ResourceDetails.vue'),
+          props: {
+            resource
+          }
+        },
+        {
           path: ':id',
           component: () => import('pages/ResourceDetails.vue'),
           props: {

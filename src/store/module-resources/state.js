@@ -41,6 +41,13 @@ export default function () {
         label: 'Posts',
         labelAttr: 'title',
         provider: dataProvider,
+        schema: {
+          type: 'object',
+          properties: {
+            title: { type: 'string' },
+            body: { type: 'string' }
+          }
+        },
         columns: [
           {
             name: 'id',

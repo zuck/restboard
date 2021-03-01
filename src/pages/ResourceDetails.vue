@@ -1,36 +1,58 @@
 <template>
   <rb-page-content :breadcrumbs="breadcrumbs">
+    <rb-resource-form
+      :resource="resource"
+      v-model="instance"
+      @submit="onSubmit"
+    />
   </rb-page-content>
 </template>
 
 <script>
 import RbPageContent from 'components/RbPageContent'
+import RbResourceForm from 'components/RbResourceForm'
 
 export default {
   name: 'PageResourceDetails',
   components: {
-    RbPageContent
+    RbPageContent,
+    RbResourceForm
   },
   props: {
     resource: Object
   },
   computed: {
+    id () {
+      return this.$route.params.id
+    },
+
     label () {
-      const labelAttr = this.resource.labelAttr || 'name'
-      return this.instance[labelAttr]
+      if (this.id) {
+        const labelAttr = this.resource.labelAttr || 'name'
+        return this.instance[labelAttr]
+      }
+      return ''
     },
 
     breadcrumbs () {
-      return [
+      const entries = [
         {
           path: `/${this.resource.name}`,
           label: this.$t(this.resource.label)
-        },
-        {
-          path: `/${this.resource.name}/${this.$route.params.id}`,
-          label: this.$t(this.label)
         }
       ]
+      if (this.id) {
+        entries.push({
+          path: `/${this.resource.name}/${this.id}`,
+          label: this.$t(this.label)
+        })
+      } else {
+        entries.push({
+          path: `/${this.resource.name}/create`,
+          label: this.$t('Create')
+        })
+      }
+      return entries
     }
   },
   data () {
@@ -43,12 +65,26 @@ export default {
   },
   methods: {
     async reloadData () {
-      if (this.$route.params.id) {
+      if (this.id) {
         const res = await this.resource.provider.getOne(
           this.resource.name,
           this.$route.params
         )
         this.instance = res.data
+      }
+    },
+
+    async onSubmit () {
+      if (this.instance.id) {
+        this.instance = await this.resource.provider.updateOne(
+          this.resource.name,
+          this.instance
+        )
+      } else {
+        this.instance = await this.resource.provider.createOne(
+          this.resource.name,
+          this.instance
+        )
       }
     }
   },
