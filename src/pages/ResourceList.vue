@@ -33,7 +33,7 @@ export default {
     }
   },
   methods: {
-    onRowClicked (row) {
+    onRowClicked (evt, row) {
       const key = this.resource.key || 'id'
       const id = row[key]
       this.$router.push(`/${this.resource.name}/${id}`)
