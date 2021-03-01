@@ -1,12 +1,14 @@
 import jsonServerProvider from 'rb-data-json-server'
 
+const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com')
+
 export default function () {
   return {
     all: [
       {
         name: 'users',
         label: 'Users',
-        provider: jsonServerProvider('http://jsonplaceholder.typicode.com'),
+        provider: dataProvider,
         columns: [
           {
             name: 'id',
@@ -37,7 +39,7 @@ export default function () {
       {
         name: 'posts',
         label: 'Posts',
-        provider: jsonServerProvider('http://jsonplaceholder.typicode.com'),
+        provider: dataProvider,
         columns: [
           {
             name: 'id',
@@ -60,7 +62,7 @@ export default function () {
       {
         name: 'todos',
         label: 'ToDo',
-        provider: jsonServerProvider('http://jsonplaceholder.typicode.com'),
+        provider: dataProvider,
         columns: [
           {
             name: 'id',
