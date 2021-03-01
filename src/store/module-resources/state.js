@@ -39,6 +39,7 @@ export default function () {
       {
         name: 'posts',
         label: 'Posts',
+        labelAttr: 'title',
         provider: dataProvider,
         columns: [
           {
@@ -55,37 +56,6 @@ export default function () {
             label: 'Title',
             align: 'left',
             field: 'title',
-            sortable: true
-          }
-        ]
-      },
-      {
-        name: 'todos',
-        label: 'ToDo',
-        provider: dataProvider,
-        columns: [
-          {
-            name: 'id',
-            required: true,
-            label: 'ID',
-            align: 'left',
-            field: 'id',
-            sortable: true
-          },
-          {
-            name: 'title',
-            required: true,
-            label: 'Title',
-            align: 'left',
-            field: 'title',
-            sortable: true
-          },
-          {
-            name: 'completed',
-            required: true,
-            label: 'Completed?',
-            align: 'left',
-            field: 'completed',
             sortable: true
           }
         ]
