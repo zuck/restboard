@@ -1,52 +1,42 @@
 <template>
-  <q-page padding class="flex">
+  <rb-page-content :breadcrumbs="breadcrumbs">
     <div class="col">
-      <q-table
-        :title="resource.label"
-        :data="rows"
-        :columns="columns"
-        :row-key="key"
+      <rb-data-table
+        :resource="resource"
+        @row-click="onRowClicked"
       />
     </div>
-  </q-page>
+  </rb-page-content>
 </template>
 
 <script>
+import RbPageContent from 'components/RbPageContent'
+import RbDataTable from 'components/RbDataTable'
+
 export default {
   name: 'PageResourceList',
+  components: {
+    RbPageContent,
+    RbDataTable
+  },
   props: {
     resource: Object
   },
   computed: {
-    title () {
-      return this.resource.label
-    },
-    columns () {
-      return this.resource.columns || []
-    },
-    key () {
-      return this.resource.key || 'id'
+    breadcrumbs () {
+      return [
+        {
+          path: `/${this.resource.name}`,
+          label: this.$t(this.resource.label)
+        }
+      ]
     }
-  },
-  data () {
-    return {
-      rows: []
-    }
-  },
-  mounted () {
-    this.reloadData()
   },
   methods: {
-    reloadData () {
-      const provider = this.resource.provider
-      provider.getMany(this.resource.name)
-        .then(res => { this.rows = res.data })
-        .catch(err => console.error(err))
-    }
-  },
-  watch: {
-    resource: function () {
-      this.reloadData()
+    onRowClicked (row) {
+      const key = this.resource.key || 'id'
+      const id = row[key]
+      this.$router.push(`/${this.resource.name}/${id}`)
     }
   }
 }
