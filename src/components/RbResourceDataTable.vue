@@ -59,7 +59,7 @@ import { exportFile } from 'quasar'
 import RbActionMenu from '../components/RbActionMenu'
 
 export default {
-  name: 'RbDataTable',
+  name: 'RbResourceDataTable',
   components: {
     RbActionMenu
   },

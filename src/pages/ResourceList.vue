@@ -1,7 +1,7 @@
 <template>
   <rb-page-content :breadcrumbs="breadcrumbs">
     <div class="col">
-      <rb-data-table
+      <rb-resource-data-table
         :resource="resource"
         @row-click="onRowClicked"
       />
@@ -11,13 +11,13 @@
 
 <script>
 import RbPageContent from 'components/RbPageContent'
-import RbDataTable from 'components/RbDataTable'
+import RbResourceDataTable from 'components/RbResourceDataTable'
 
 export default {
   name: 'PageResourceList',
   components: {
     RbPageContent,
-    RbDataTable
+    RbResourceDataTable
   },
   props: {
     resource: Object
