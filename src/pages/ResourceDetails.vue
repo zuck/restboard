@@ -75,19 +75,16 @@ export default {
     },
 
     async onSubmit () {
-      let res = {
-        data: this.instance
-      }
-      if (this.instance.id) {
-        res = await this.resource.provider.updateOne(
-          this.resource.name,
-          this.instance
-        )
+      const data = { ...this.instance }
+      let res = { data }
+      const resourceName = this.resource.name
+      const keyAttr = this.resource.key || 'id'
+      const keyVal = this.instance[keyAttr]
+      if (keyVal) {
+        data[keyAttr] = keyVal
+        res = await this.resource.provider.updateOne(resourceName, data)
       } else {
-        res = await this.resource.provider.createOne(
-          this.resource.name,
-          this.instance
-        )
+        res = await this.resource.provider.createOne(resourceName, data)
       }
       this.instance = res.data
     }
