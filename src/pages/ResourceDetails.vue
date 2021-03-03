@@ -75,17 +75,21 @@ export default {
     },
 
     async onSubmit () {
+      let res = {
+        data: this.instance
+      }
       if (this.instance.id) {
-        this.instance = await this.resource.provider.updateOne(
+        res = await this.resource.provider.updateOne(
           this.resource.name,
           this.instance
         )
       } else {
-        this.instance = await this.resource.provider.createOne(
+        res = await this.resource.provider.createOne(
           this.resource.name,
           this.instance
         )
       }
+      this.instance = res.data
     }
   },
   watch: {
