@@ -95,6 +95,13 @@ export default {
         clearable: true,
         hint: schema.description
       })
+    }, {
+      componentName: 'JsonSchemaForm',
+      matcher: { type: 'object' },
+      props: (propName, schema, uiSchema) => ({
+        useDefaultStyles: false,
+        class: 'q-ma-none q-gutter-y-md'
+      })
     }]
     this.wrapperConfig = {
       componentName: 'div',
