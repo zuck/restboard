@@ -71,6 +71,8 @@ export default {
           this.$route.params
         )
         this.instance = res.data
+      } else {
+        this.instance = {}
       }
     },
 

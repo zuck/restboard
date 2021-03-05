@@ -69,7 +69,7 @@ export default {
     this.componentsConfig = [{
       componentName: QInput,
       matcher: { type: 'number' },
-      props: (propName, schema, uiSchema) => ({
+      props: (propName, schema) => ({
         label: capitalize(this.$t(schema.title || propName)),
         outlined: true,
         clearable: true,
@@ -79,7 +79,7 @@ export default {
     }, {
       componentName: QInput,
       matcher: { type: 'integer' },
-      props: (propName, schema, uiSchema) => ({
+      props: (propName, schema) => ({
         label: capitalize(this.$t(schema.title || propName)),
         outlined: true,
         clearable: true,
@@ -89,7 +89,7 @@ export default {
     }, {
       componentName: QInput,
       matcher: { type: 'string' },
-      props: (propName, schema, uiSchema) => ({
+      props: (propName, schema) => ({
         label: capitalize(this.$t(schema.title || propName)),
         outlined: true,
         clearable: true,
@@ -105,7 +105,7 @@ export default {
     }]
     this.wrapperConfig = {
       componentName: 'div',
-      props: (propName, schema, uiSchema) => ({
+      props: () => ({
         class: 'col'
       })
     }
@@ -141,7 +141,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style scoped lang="sass">
 .rb-form-container
   max-width: 600px
 </style>

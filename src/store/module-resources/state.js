@@ -1,6 +1,6 @@
-import jsonServerProvider from 'rb-data-json-server'
+import createJsonServerProvider from 'rb-data-json-server'
 
-const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com')
+const dataProvider = createJsonServerProvider('http://jsonplaceholder.typicode.com')
 
 export default function () {
   return {
@@ -9,6 +9,13 @@ export default function () {
         name: 'users',
         label: 'Users',
         provider: dataProvider,
+        schema: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            email: { type: 'string' }
+          }
+        },
         columns: [
           {
             name: 'id',
