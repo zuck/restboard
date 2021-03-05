@@ -13,7 +13,10 @@ export default function () {
           type: 'object',
           properties: {
             name: { type: 'string' },
-            email: { type: 'string' }
+            email: {
+              type: 'string',
+              title: 'Email address'
+            }
           }
         },
         columns: [
