@@ -116,7 +116,7 @@ export default {
     async reloadData (props, url) {
       this.loading = true
       try {
-        const res = await this.resource.provider.getMany(this.resource.name)
+        const res = await this.resource.getMany()
         this.rows = res.data
       } catch (err) {
         console.error(err)

@@ -48,9 +48,22 @@ export default {
     }
   },
   computed: {
+    id () {
+      const keyAttr = this.resource.key || 'id'
+      return this.value[keyAttr]
+    },
     schema () {
-      const defaultSchema = toJsonSchema(this.value)
-      const resourceSchema = this.resource.schema || defaultSchema
+      let resourceSchema = toJsonSchema(this.value)
+      if (
+        this.id &&
+        Object.keys(this.resource.updateSchema.properties).length > 0
+      ) {
+        resourceSchema = this.resource.updateSchema
+      } else if (
+        Object.keys(this.resource.createSchema.properties).length > 0
+      ) {
+        resourceSchema = this.resource.createSchema
+      }
       return {
         type: 'object',
         properties: {
