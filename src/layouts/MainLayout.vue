@@ -1,20 +1,7 @@
 <template>
   <q-layout view="hHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          {{ $q.productName }}
-        </q-toolbar-title>
-      </q-toolbar>
+      <rb-toolbar v-model="leftDrawerOpen" />
     </q-header>
 
     <q-drawer
@@ -36,11 +23,13 @@
 </template>
 
 <script>
+import RbToolbar from '../components/RbToolbar'
 import RbSidebar from 'components/RbSidebar.vue'
 
 export default {
   name: 'MainLayout',
   components: {
+    RbToolbar,
     RbSidebar
   },
   computed: {
