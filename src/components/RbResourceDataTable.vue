@@ -55,7 +55,7 @@
 
 <script>
 import { exportFile } from 'quasar'
-
+import csvStringify from 'csv-stringify'
 import RbActionMenu from '../components/RbActionMenu'
 
 export default {
@@ -138,19 +138,29 @@ export default {
     },
 
     exportAsCSV () {
-      const content = '' // TODO: ...
-      const status = exportFile(
-        `${this.resource.label}.csv`,
-        content,
-        'text/csv'
-      )
-      if (status !== true) {
-        this.$q.notify({
-          message: this.$t('Browser denied file download...'),
-          color: 'negative',
-          icon: 'warning'
-        })
-      }
+      csvStringify(this.rows, {
+        header: true
+      }, (err, output) => {
+        if (err) {
+          return this.$q.notify({
+            message: this.$t('CSV generation failed...'),
+            color: 'negative',
+            icon: 'warning'
+          })
+        }
+        const status = exportFile(
+          `${this.resource.label}.csv`,
+          output,
+          'text/csv'
+        )
+        if (status !== true) {
+          this.$q.notify({
+            message: this.$t('Browser denied file download...'),
+            color: 'negative',
+            icon: 'warning'
+          })
+        }
+      })
     }
   },
   watch: {
