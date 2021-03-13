@@ -1,6 +1,9 @@
 <template>
   <q-list :separator="separator">
     <q-item clickable v-ripple to="/" exact>
+      <q-item-section avatar>
+        <q-icon name="home" />
+      </q-item-section>
       <q-item-section>{{ $t('Dashboard') }}</q-item-section>
     </q-item>
     <rb-resource-menu

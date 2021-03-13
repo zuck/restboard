@@ -1,12 +1,11 @@
 <template>
   <q-expansion-item
-    expand-separator
     :icon="resource.icon"
     :label="resource.label || resource.name"
     :caption="resource.caption"
     :key="resource.name"
   >
-    <q-list>
+    <q-list separator>
       <q-item clickable v-ripple :to="`/${resource.name}`">
         <q-item-section>{{ $t('Show all') }}</q-item-section>
       </q-item>

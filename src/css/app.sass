@@ -1,1 +1,28 @@
-// app global css in Sass form
+body
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"
+
+.body--light
+  background-color: $grey-2
+
+  .q-table tbody tr:nth-child(odd)
+    background-color: rgba(0, 0, 0, .01)
+
+  .q-list .q-list
+    border-top: 1px solid $separator-color
+    border-bottom: 1px solid $separator-color
+    background-color: rgba(0, 0, 0, .04)
+
+.body--dark
+  background-color: $dark-page
+
+  .q-table tbody tr:nth-child(odd)
+    background-color: rgba(255, 255, 255, .01)
+
+  .q-list .q-list
+    background-color: rgba(0, 0, 0, .2)
+
+.q-table thead th
+  font-size: 1em
+
+:required + .q-field__label:after
+  content: ' *'
