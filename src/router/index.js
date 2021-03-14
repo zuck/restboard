@@ -36,33 +36,24 @@ export default function ({ store, ssrContext }) {
   })
 
   // If user is not authenticated or authorized, redirect her to login page.
-  Router.beforeEach((to, from, next) => {
+  Router.beforeEach(async (to, from, next) => {
     const routingDescr = `Routing from ${from.path} to ${to.path}...`
-    return new Promise((resolve, reject) => {
-      if (WHITELIST_URLS.indexOf(to.path) !== -1) {
-        resolve()
-      } else {
-        store
-          .dispatch('core/checkRoutePermissions', to.path)
-          .then(() => {
-            if (store.state && store.state.core.loggedAccount) {
-              resolve()
-            } else {
-              throw new Error('Unauthorized access')
-            }
-          })
-          .catch(err => reject(err))
-      }
-    })
-      .then(() => {
+    if (WHITELIST_URLS.indexOf(to.path) !== -1) {
+      console.debug(`[ALLOW] ${routingDescr}`)
+      return next()
+    }
+    try {
+      await store.dispatch('core/checkRoutePermissions', to.path)
+      if (store.state && store.state.core.loggedAccount) {
         console.debug(`[ALLOW] ${routingDescr}`)
-        next()
-      })
-      .catch(err => {
-        console.debug(`[BLOCK] ${routingDescr}`)
-        console.error(err)
-        next('/login')
-      })
+        return next()
+      } else {
+        throw new Error('Unauthorized access')
+      }
+    } catch (err) {
+      console.debug(`[BLOCK] ${routingDescr}`)
+      return next('/login')
+    }
   })
 
   return Router

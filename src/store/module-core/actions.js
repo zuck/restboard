@@ -32,24 +32,27 @@ export function login ({ commit, getters, dispatch }, credentials) {
 }
 
 export function logout ({ commit }) {
-  commit('setLastError', null)
-  commit('setLoggedAccount', null)
-  commit('setLocale', DEFAULT_LOCALE)
   return authProvider.logout()
+    .then(() => commit('setLoggedAccount', null))
+    .then(() => commit('setLocale', DEFAULT_LOCALE))
+    .catch(err => commit('setLastError', err.message))
 }
 
-export function checkRoutePermissions ({ commit, dispatch, state }, route) {
+export async function checkRoutePermissions ({ commit, dispatch, state }, route) {
   commit('setLastError', null)
-  return authProvider
-    .checkAuth()
-    .catch(err => {
-      commit('setLastError', err.message)
-      dispatch('logout')
-    })
-    .then(() => authProvider.can(state.loggedAccount, route))
-    .catch(err => {
-      commit('setLastError', err.message)
-    })
+  // Authentication
+  try {
+    await authProvider.checkAuth()
+  } catch (err) {
+    commit('setLastError', err.message)
+    return dispatch('logout')
+  }
+  // Authorization
+  try {
+    await authProvider.can(state.loggedAccount, route)
+  } catch (err) {
+    commit('setLastError', err.message)
+  }
 }
 
 export function toggleDarkMode ({ commit, state }) {
