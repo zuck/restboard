@@ -9,7 +9,13 @@
 </template>
 
 <script>
+import * as info from '../../package.json'
+
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+
+  created () {
+    this.productName = info.productName
+  }
 }
 </script>

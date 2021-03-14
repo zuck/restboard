@@ -14,7 +14,7 @@
           flat
           icon="exit_to_app"
           :label="$t('Logout')"
-          @click="onLogout"
+          @click="$emit('logout')"
         />
       </div>
     </div>
@@ -27,14 +27,6 @@ export default {
 
   props: {
     username: String
-  },
-
-  methods: {
-    onLogout () {
-      this.$store
-        .dispatch('logout')
-        .then(() => this.$router.push('/login'))
-    }
   }
 }
 </script>

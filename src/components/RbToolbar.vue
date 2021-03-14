@@ -19,21 +19,27 @@
 
     <q-space/>
 
-    <div v-if="$q.screen.gt.xs">{{ username }}</div>
+    <q-btn flat round dense icon="brightness_6" @click="onDarkModeToggle"/>
+    <div class="q-ml-sm" v-if="$q.screen.gt.xs">{{ username }}</div>
     <q-btn class="q-ml-sm" flat round dense icon="account_circle">
-      <rb-user-menu :username="username"/>
+      <rb-user-menu :username="username" @logout="onLogout"/>
     </q-btn>
   </q-toolbar>
 </template>
 
 <script>
 import RbUserMenu from 'components/RbUserMenu'
+import * as info from '../../package.json'
 
 export default {
   name: 'RbToolbar',
 
   components: {
     RbUserMenu
+  },
+
+  props: {
+    value: Boolean
   },
 
   computed: {
@@ -45,8 +51,20 @@ export default {
     }
   },
 
-  props: {
-    value: Boolean
+  created () {
+    this.productName = info.productName
+  },
+
+  methods: {
+    onDarkModeToggle () {
+      this.$store.dispatch('core/toggleDarkMode')
+    },
+
+    onLogout () {
+      this.$store
+        .dispatch('core/logout')
+        .then(() => this.$router.push('/login'))
+    }
   }
 }
 </script>
