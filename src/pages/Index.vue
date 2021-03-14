@@ -1,9 +1,10 @@
 <template>
   <q-page class="flex flex-center">
     <img
-      src="~assets/logo.svg"
-      height="128"
+      src="~assets/splash.svg"
+      width="300"
       :alt="productName"
+      class="splash"
     >
   </q-page>
 </template>
@@ -19,3 +20,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="sass">
+.splash
+  opacity: 0.35
+</style>
