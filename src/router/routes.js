@@ -1,12 +1,22 @@
 function createRoutes (store) {
-  // Homepage
-  const routes = [{
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ]
-  }]
+  const routes = [
+    // Login
+    {
+      path: '/login',
+      component: () => import('layouts/FullPageForm.vue'),
+      children: [
+        { path: '', component: () => import('../pages/Login.vue') }
+      ]
+    },
+    // Homepage
+    {
+      path: '/',
+      component: () => import('layouts/MainLayout.vue'),
+      children: [
+        { path: '', component: () => import('pages/Index.vue') }
+      ]
+    }
+  ]
   // Add routes for each registered resource
   for (const resource of store.state.resources.all) {
     routes.push({

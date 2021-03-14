@@ -17,8 +17,9 @@
     "core-js": "^3.6.5",
     "csv-stringify": "^5.6.2",
     "quasar": "^1.0.0",
-    "rb-core-module": "^0.3.0",
-    "rb-data-provider-json-server": "^0.4.0",
+    "rb-auth-provider-simple": "^0.1.0",
+    "rb-core-module": "^0.5.0",
+    "rb-data-provider-json-server": "^0.5.0",
     "to-json-schema": "^0.2.5",
     "vue-i18n": "^8.0.0",
     "vuelidate": "^0.7.6"
