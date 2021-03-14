@@ -76,9 +76,11 @@ export default {
         email: this.email,
         password: this.password,
         keepLogged: this.rememberMe
-      }).then(() => {
-        this.$router.push('/')
       })
+        .then(() => {
+          this.$router.push('/')
+        })
+        .catch(err => console.error(err))
     }
   }
 }
