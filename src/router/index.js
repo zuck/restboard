@@ -45,7 +45,7 @@ export default function ({ store, ssrContext }) {
         store
           .dispatch('core/checkRoutePermissions', to.path)
           .then(() => {
-            if (store.state && store.state.loggedAccount) {
+            if (store.state && store.state.core.loggedAccount) {
               resolve()
             } else {
               throw new Error('Unauthorized access')
@@ -58,8 +58,9 @@ export default function ({ store, ssrContext }) {
         console.debug(`[ALLOW] ${routingDescr}`)
         next()
       })
-      .catch(() => {
+      .catch(err => {
         console.debug(`[BLOCK] ${routingDescr}`)
+        console.error(err)
         next('/login')
       })
   })
