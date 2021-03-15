@@ -24,8 +24,12 @@ export function setJWT (state, jwt) {
   state.jwt = jwt
 }
 
-export function setLoggedAccount (state, account) {
-  state.loggedAccount = account
+export function setCurrentUser (state, user) {
+  state.currentUser = user
+}
+
+export function setUserIdentity (state, userIdentity) {
+  state.userIdentity = userIdentity
 }
 
 export function setLocale (state, lang) {

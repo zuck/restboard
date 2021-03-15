@@ -6,7 +6,8 @@ import {
 export default function () {
   return {
     loading: false,
-    loggedAccount: null,
+    currentUser: null,
+    userIdentity: null,
     jwt: null,
     locale: DEFAULT_LOCALE,
     darkMode: 'auto',

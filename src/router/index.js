@@ -44,7 +44,7 @@ export default function ({ store, ssrContext }) {
     }
     try {
       await store.dispatch('core/checkRoutePermissions', to.path)
-      if (store.state && store.state.core.loggedAccount) {
+      if (store.state && store.state.core.currentUser) {
         console.debug(`[ALLOW] ${routingDescr}`)
         return next()
       } else {
@@ -52,6 +52,7 @@ export default function ({ store, ssrContext }) {
       }
     } catch (err) {
       console.debug(`[BLOCK] ${routingDescr}`)
+      console.error(err)
       return next('/login')
     }
   })
