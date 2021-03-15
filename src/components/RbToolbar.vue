@@ -20,9 +20,10 @@
     <q-space/>
 
     <q-btn flat round dense icon="brightness_6" @click="onDarkModeToggle"/>
-    <div class="q-ml-sm" v-if="$q.screen.gt.xs">{{ username }}</div>
+    <q-separator class="q-mx-sm" vertical/>
+    <div class="q-ml-sm" v-if="$q.screen.gt.xs">{{ userIdentity }}</div>
     <q-btn class="q-ml-sm" flat round dense icon="account_circle">
-      <rb-user-menu :username="username" @logout="onLogout"/>
+      <rb-user-menu :identity="userIdentity" @logout="onLogout"/>
     </q-btn>
   </q-toolbar>
 </template>
@@ -43,11 +44,8 @@ export default {
   },
 
   computed: {
-    username () {
-      const user = this.$store.state.loggedAccount || {}
-      return (user.firstname && user.lastname)
-        ? `${user.firstname} ${user.lastname}`
-        : user.email
+    userIdentity () {
+      return this.$store.state.core.userIdentity || ''
     }
   },
 

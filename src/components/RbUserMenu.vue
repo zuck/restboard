@@ -1,23 +1,24 @@
 <template>
   <q-menu>
-    <div class="userarea column items-center q-pa-md">
-      <q-avatar size="80px">
-        <img src="~assets/logo.svg">
-      </q-avatar>
+    <q-list class="items-center q-pa-md" separator>
+      <q-item class="column items-center">
+        <q-avatar size="80px">
+          <img src="~assets/logo.svg">
+        </q-avatar>
+        <div class="text-subtitle1 q-mt-sm q-mb-xs">
+          {{ identity }}
+        </div>
+      </q-item>
 
-      <div class="text-subtitle1 q-mt-sm q-mb-xs">
-        {{ username }}
-      </div>
-
-      <div class="column q-gutter-sm">
+      <q-item>
         <q-btn
           flat
           icon="exit_to_app"
           :label="$t('Logout')"
           @click="$emit('logout')"
         />
-      </div>
-    </div>
+      </q-item>
+    </q-list>
   </q-menu>
 </template>
 
@@ -26,7 +27,7 @@ export default {
   name: 'RbUserMenu',
 
   props: {
-    username: String
+    identity: String
   }
 }
 </script>
