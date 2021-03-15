@@ -1,11 +1,9 @@
 <template>
   <rb-page-content :breadcrumbs="breadcrumbs">
-    <div class="col">
-      <rb-resource-data-table
-        :resource="resource"
-        @row-click="onRowClicked"
-      />
-    </div>
+    <rb-resource-data-table
+      :resource="resource"
+      @row-click="onRowClicked"
+    />
   </rb-page-content>
 </template>
 
