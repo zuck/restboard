@@ -9,7 +9,9 @@
         :to="bc.path || null"
       />
     </q-breadcrumbs>
-    <slot></slot>
+    <div class="column">
+      <slot></slot>
+    </div>
   </q-page>
 </template>
 
