@@ -28,8 +28,7 @@ export default {
 
     label () {
       if (this.id) {
-        const labelAttr = this.resource.labelAttr || 'name'
-        return this.instance[labelAttr]
+        return this.resource.stringify(this.instance)
       }
       return ''
     },

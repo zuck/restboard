@@ -4,6 +4,8 @@ import createJsonServerProvider from 'rb-data-provider-json-server'
 const dataProvider = createJsonServerProvider('http://jsonplaceholder.typicode.com')
 const userResource = createResource({
   name: 'users',
+  icon: 'people',
+  displayAttr: 'email',
   provider: dataProvider,
   schema: {
     type: 'object',
@@ -44,7 +46,8 @@ const userResource = createResource({
 })
 const postResource = createResource({
   name: 'posts',
-  labelAttr: 'title',
+  icon: 'forum',
+  displayAttr: 'title',
   provider: dataProvider,
   schema: {
     type: 'object',
