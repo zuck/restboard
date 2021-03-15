@@ -10,5 +10,6 @@ export default {
   logout: 'Esci',
   invalid_credentials: 'Email o password invalidi',
   invalid_jwt: 'JWT mancante o invalido',
-  dashboard: 'Dashboard'
+  dashboard: 'Dashboard',
+  search: 'Cerca'
 }

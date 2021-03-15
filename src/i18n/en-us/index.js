@@ -10,5 +10,6 @@ export default {
   logout: 'Logout',
   invalid_credentials: 'Invalid email or password',
   invalid_jwt: 'Missing or invalid JWT',
-  dashboard: 'Dashboard'
+  dashboard: 'Dashboard',
+  search: 'Search'
 }
