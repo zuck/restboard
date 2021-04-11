@@ -1,10 +1,14 @@
 <template>
-  <rb-page-content :breadcrumbs="breadcrumbs">
-    <rb-resource-form
-      :resource="resource"
-      v-model="instance"
-      @submit="onSubmit"
-    />
+  <rb-page-content :breadcrumbs="breadcrumbs" :title="pageTitle">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <rb-resource-form
+          :resource="resource"
+          v-model="instance"
+          @submit="onSubmit"
+        />
+      </div>
+    </div>
   </rb-page-content>
 </template>
 
@@ -31,6 +35,10 @@ export default {
         return this.resource.stringify(this.instance)
       }
       return ''
+    },
+
+    pageTitle () {
+      return (this.id) ? this.$t('Details') : this.$t('New')
     },
 
     breadcrumbs () {

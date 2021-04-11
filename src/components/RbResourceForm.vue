@@ -153,8 +153,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="sass">
-.rb-form-container
-  max-width: 600px
-</style>
