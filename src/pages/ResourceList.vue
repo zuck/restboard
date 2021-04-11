@@ -1,5 +1,5 @@
 <template>
-  <rb-page-content :breadcrumbs="breadcrumbs">
+  <rb-page-content :breadcrumbs="breadcrumbs" :title="$t('List')">
     <rb-resource-data-table
       :resource="resource"
       @row-click="onRowClicked"
