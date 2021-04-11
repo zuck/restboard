@@ -5,7 +5,7 @@ const dataProvider = createJsonServerProvider('http://jsonplaceholder.typicode.c
 const userResource = createResource({
   name: 'users',
   icon: 'people',
-  displayAttr: 'email',
+  displayAttr: 'name',
   provider: dataProvider,
   schema: {
     type: 'object',
