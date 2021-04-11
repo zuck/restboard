@@ -11,7 +11,7 @@
             :to="bc.path || null"
           />
         </q-breadcrumbs>
-        <h1 class="q-my-none q-mt-md text-h4">{{ title }}</h1>
+        <h1 class="q-my-none q-mt-xs text-h4">{{ title }}</h1>
       </q-card-section>
     </q-card>
     <div class="column q-gutter-md q-pa-md">
