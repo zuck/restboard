@@ -7,7 +7,7 @@
   >
     <q-list separator>
       <q-item clickable v-ripple :to="`/${resource.name}`">
-        <q-item-section>{{ $t('Show all') }}</q-item-section>
+        <q-item-section>{{ $t('List') }}</q-item-section>
       </q-item>
       <q-item clickable v-ripple :to="`/${resource.name}/create`">
         <q-item-section>{{ $t('Create') }}</q-item-section>
