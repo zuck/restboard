@@ -3,7 +3,8 @@
     <div class="row no-gutter">
       <div class="col">
         <q-btn
-          flat class="full-width"
+          flat
+          class="full-width"
           @click="resetFilters(true)"
         >
           {{ $t('Select all') }}
@@ -11,22 +12,29 @@
       </div>
       <div class="col">
         <q-btn
-          flat class="full-width"
+          flat
+          class="full-width"
           @click="resetFilters(false)"
         >
           {{ $t('Deselect all') }}
         </q-btn>
       </div>
     </div>
-    <q-list dense style="min-width: 100px">
-      <q-separator/>
+    <q-list
+      dense
+      style="min-width: 100px"
+    >
+      <q-separator />
       <q-item
         v-for="item in filterKeys"
         :key="item"
-        clickable
         v-close-popup
+        clickable
       >
-        <q-item-section side top>
+        <q-item-section
+          side
+          top
+        >
           <q-checkbox
             :value="filters[item]"
             @input="toggleFilter(item)"
@@ -47,14 +55,19 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      filters: {}
+    }
+  },
   computed: {
     filterKeys () {
       return Object.keys(this.filters || {})
     }
   },
-  data () {
-    return {
-      filters: {}
+  watch: {
+    value: function () {
+      this.reloadFilters()
     }
   },
   mounted () {
@@ -77,11 +90,6 @@ export default {
     toggleFilter (key) {
       this.filters[key] = !this.filters[key]
       this.$emit('input', this.filters)
-    }
-  },
-  watch: {
-    value: function () {
-      this.reloadFilters()
     }
   }
 }
