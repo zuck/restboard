@@ -1,7 +1,7 @@
 <template>
   <q-table
     :row-key="rowKey"
-    :data="rows"
+    :data="filteredRows"
     :columns="columns"
     :loading="loading"
     :grid="$q.screen.xs"
@@ -45,6 +45,25 @@
       </div>
     </template>
 
+    <template v-slot:header-cell="props">
+      <q-th :props="props">
+        {{ props.col.label }}
+        <q-btn
+          flat
+          round
+          dense
+          icon="filter_list"
+          v-if="'filters' in props.col && colFilters[props.col.field]"
+          @click.stop
+        >
+          <rb-column-auto-filter
+            :value="colFilters[props.col.field]"
+            @input="evt => onFilterChange(props.col.field, evt)"
+          />
+        </q-btn>
+      </q-th>
+    </template>
+
     <template v-slot:body-cell-actions="props">
       <q-td v-if="actions" auto-width :props="props">
         <rb-action-menu :actions="actions" :data="props.row"/>
@@ -57,11 +76,13 @@
 import { exportFile } from 'quasar'
 import csvStringify from 'csv-stringify'
 import RbActionMenu from '../components/RbActionMenu'
+import RbColumnAutoFilter from '../components/RbColumnAutoFilter'
 
 export default {
   name: 'RbResourceDataTable',
   components: {
-    RbActionMenu
+    RbActionMenu,
+    RbColumnAutoFilter
   },
   props: {
     resource: {
@@ -80,7 +101,7 @@ export default {
   },
   computed: {
     columns () {
-      const cols = this.resource.columns || []
+      const cols = [...this.resource.columns]
       if (this.selection) {
         cols.unshift({})
       }
@@ -91,6 +112,9 @@ export default {
         })
       }
       return cols
+    },
+    columnsWithFilters () {
+      return this.columns.filter(col => col.filters)
     },
     selection () {
       return this.resource.selectionMode
@@ -106,6 +130,8 @@ export default {
     return {
       searchQuery: '',
       rows: [],
+      colFilters: {},
+      filteredRows: [],
       loading: true
     }
   },
@@ -113,11 +139,12 @@ export default {
     this.reloadData()
   },
   methods: {
-    async reloadData (props, url) {
+    async reloadData () {
       this.loading = true
       try {
         const res = await this.resource.getMany()
         this.rows = res.data
+        this.reloadColFilters()
       } catch (err) {
         console.error(err)
         this.$q.notify({
@@ -129,12 +156,26 @@ export default {
       this.loading = false
     },
 
-    onRowClicked (evt, row) {
-      this.$emit('row-click', evt, row)
+    reloadColFilters () {
+      this.columnsWithFilters.forEach(col => {
+        this.colFilters[col.field] = {}
+        this.rows.forEach(row => {
+          const key = row[col.field]
+          this.colFilters[col.field][key] = true
+        })
+      })
+      this.filterRows()
     },
 
-    onSelectionChanged (evt) {
-      this.$emit('update:selected', evt)
+    filterRows () {
+      this.filteredRows = [...this.rows]
+      this.columnsWithFilters.forEach(col => {
+        const filters = this.colFilters[col.field] || {}
+        this.filteredRows = this.filteredRows.filter(row => {
+          const key = row[col.field]
+          return !!filters[key]
+        })
+      })
     },
 
     exportAsCSV () {
@@ -161,6 +202,23 @@ export default {
           })
         }
       })
+    },
+
+    onRowClicked (evt, row) {
+      this.$emit('row-click', evt, row)
+    },
+
+    onSelectionChanged (evt) {
+      this.$emit('update:selected', evt)
+    },
+
+    onFilterChange (columnName, evt) {
+      const val = evt
+      const old = this.colFilters[columnName]
+      if (JSON.stringify(val) !== JSON.stringify(old)) {
+        this.colFilters[columnName] = val
+        this.filterRows()
+      }
     }
   },
   watch: {

@@ -32,7 +32,8 @@ const userResource = createResource({
       label: 'Name',
       align: 'left',
       field: 'name',
-      sortable: true
+      sortable: true,
+      filters: true
     },
     {
       name: 'email',
