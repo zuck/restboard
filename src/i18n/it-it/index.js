@@ -11,5 +11,6 @@ export default {
   invalid_credentials: 'Email o password invalidi',
   invalid_jwt: 'JWT mancante o invalido',
   dashboard: 'Dashboard',
-  search: 'Cerca'
+  search: 'Cerca',
+  actions: 'Azioni'
 }

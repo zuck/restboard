@@ -10,9 +10,10 @@
         dense
         flat
         round
+        color="grey-7"
         :disable="action.disable"
         :icon="action.icon"
-        @click="action.onClick"
+        @click.stop="action.onClick"
       />
     </div>
     <q-btn
@@ -21,6 +22,8 @@
       dense
       flat
       icon="more_vert"
+      color="grey-7"
+      @click.stop
     >
       <q-menu
         auto-close
@@ -37,7 +40,10 @@
           >
             <q-item-section>{{ $t(action.name) }}</q-item-section>
             <q-item-section avatar>
-              <q-icon :name="action.icon" />
+              <q-icon
+                color="grey-7"
+                :name="action.icon"
+              />
             </q-item-section>
           </q-item>
         </q-list>

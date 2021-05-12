@@ -66,7 +66,7 @@
 
     <template v-slot:body-cell-actions="props">
       <q-td v-if="actions" auto-width :props="props">
-        <rb-action-menu :actions="actions" :data="props.row" />
+        <rb-action-menu :actions="actions" />
       </q-td>
     </template>
   </q-table>
