@@ -47,7 +47,6 @@
 
     <template v-slot:header-cell="props">
       <q-th :props="props">
-        {{ props.col.label }}
         <q-btn
           flat
           round
@@ -61,12 +60,13 @@
             @input="evt => onFilterChange(props.col.field, evt)"
           />
         </q-btn>
+        {{ props.col.label }}
       </q-th>
     </template>
 
     <template v-slot:body-cell-actions="props">
       <q-td v-if="actions" auto-width :props="props">
-        <rb-action-menu :actions="actions" :data="props.row"/>
+        <rb-action-menu :actions="actions" :data="props.row" />
       </q-td>
     </template>
   </q-table>
@@ -179,29 +179,33 @@ export default {
     },
 
     exportAsCSV () {
-      csvStringify(this.rows, {
-        header: true
-      }, (err, output) => {
-        if (err) {
-          return this.$q.notify({
-            message: this.$t('CSV generation failed...'),
-            color: 'negative',
-            icon: 'warning'
-          })
+      csvStringify(
+        this.rows,
+        {
+          header: true
+        },
+        (err, output) => {
+          if (err) {
+            return this.$q.notify({
+              message: this.$t('CSV generation failed...'),
+              color: 'negative',
+              icon: 'warning'
+            })
+          }
+          const status = exportFile(
+            `${this.resource.label}.csv`,
+            output,
+            'text/csv'
+          )
+          if (status !== true) {
+            this.$q.notify({
+              message: this.$t('Browser denied file download...'),
+              color: 'negative',
+              icon: 'warning'
+            })
+          }
         }
-        const status = exportFile(
-          `${this.resource.label}.csv`,
-          output,
-          'text/csv'
-        )
-        if (status !== true) {
-          this.$q.notify({
-            message: this.$t('Browser denied file download...'),
-            color: 'negative',
-            icon: 'warning'
-          })
-        }
-      })
+      )
     },
 
     onRowClicked (evt, row) {
