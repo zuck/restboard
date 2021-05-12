@@ -4,7 +4,7 @@
       src="~assets/splash.svg"
       width="300"
       :alt="productName"
-      class="splash"
+      class="faded"
     >
   </q-page>
 </template>
@@ -20,8 +20,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="sass">
-.splash
-  opacity: 0.35
-</style>
