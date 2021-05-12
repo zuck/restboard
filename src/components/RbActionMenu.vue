@@ -10,7 +10,7 @@
         dense
         flat
         round
-        color="grey-7"
+        class="faded"
         :disable="action.disable"
         :icon="action.icon"
         @click.stop="action.onClick"
@@ -22,7 +22,7 @@
       dense
       flat
       icon="more_vert"
-      color="grey-7"
+      class="faded"
       @click.stop
     >
       <q-menu
@@ -41,7 +41,7 @@
             <q-item-section>{{ $t(action.name) }}</q-item-section>
             <q-item-section avatar>
               <q-icon
-                color="grey-7"
+                class="faded"
                 :name="action.icon"
               />
             </q-item-section>
