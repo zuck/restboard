@@ -8,6 +8,14 @@ function createRoutes (store) {
         { path: '', component: () => import('../pages/Login.vue') }
       ]
     },
+    // Profile
+    {
+      path: '/profile',
+      component: () => import('layouts/MainLayout.vue'),
+      children: [
+        { path: '', component: () => import('pages/Profile.vue') }
+      ]
+    },
     // Homepage
     {
       path: '/',

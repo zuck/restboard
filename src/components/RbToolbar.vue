@@ -23,7 +23,11 @@
     <q-separator class="q-mx-sm" vertical/>
     <div class="q-ml-sm" v-if="$q.screen.gt.xs">{{ userIdentity }}</div>
     <q-btn class="q-ml-sm" flat round dense icon="account_circle">
-      <rb-user-menu :identity="userIdentity" @logout="onLogout"/>
+      <rb-user-menu
+        :identity="userIdentity"
+        @profile="onShowProfile"
+        @logout="onLogout"
+      />
     </q-btn>
   </q-toolbar>
 </template>
@@ -56,6 +60,10 @@ export default {
   methods: {
     onDarkModeToggle () {
       this.$store.dispatch('core/toggleDarkMode')
+    },
+
+    onShowProfile () {
+      this.$router.push('/profile')
     },
 
     onLogout () {

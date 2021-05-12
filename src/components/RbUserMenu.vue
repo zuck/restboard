@@ -1,7 +1,7 @@
 <template>
   <q-menu>
-    <q-list class="items-center q-pa-md" separator>
-      <q-item class="column items-center">
+    <q-list class="items-center" separator>
+      <q-item class="column items-center q-py-md q-px-xl">
         <q-avatar size="80px">
           <img src="~assets/logo.svg">
         </q-avatar>
@@ -10,13 +10,22 @@
         </div>
       </q-item>
 
-      <q-item>
-        <q-btn
-          flat
-          icon="exit_to_app"
-          :label="$t('Logout')"
-          @click="$emit('logout')"
-        />
+      <q-item clickable @click="$emit('profile')">
+        <q-item-section avatar>
+          <q-icon name="info" class="faded" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ $t('Profile') }}</q-item-label>
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable @click="$emit('logout')">
+        <q-item-section avatar>
+          <q-icon name="exit_to_app" class="faded" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ $t('Logout') }}</q-item-label>
+        </q-item-section>
       </q-item>
     </q-list>
   </q-menu>
