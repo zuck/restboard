@@ -18,7 +18,10 @@ export default {
     RbResourceDataTable
   },
   props: {
-    resource: Object
+    resource: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     breadcrumbs () {
