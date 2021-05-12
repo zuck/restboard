@@ -1,10 +1,15 @@
 <template>
   <q-list :separator="separator">
-    <q-item clickable v-ripple to="/" exact>
+    <q-item
+      v-if="!hideRootLink"
+      clickable
+      v-ripple
+      to="/" exact
+    >
       <q-item-section avatar>
         <q-icon name="home" />
       </q-item-section>
-      <q-item-section>{{ $t('Dashboard') }}</q-item-section>
+      <q-item-section>{{ rootLinkLabel || $t('Dashboard') }}</q-item-section>
     </q-item>
     <rb-resource-menu
       v-for="resource in resources"
@@ -24,7 +29,9 @@ export default {
   },
   props: {
     resources: Array,
-    separator: Boolean
+    separator: Boolean,
+    hideRootLink: Boolean,
+    rootLinkLabel: String
   }
 }
 </script>
