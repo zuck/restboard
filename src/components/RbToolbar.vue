@@ -17,18 +17,32 @@
       >
     </div>
 
+    <slot name="left"></slot>
+
     <q-space/>
 
-    <q-btn flat round dense icon="brightness_6" @click="onDarkModeToggle"/>
-    <q-separator class="q-mx-sm" vertical/>
-    <div class="q-ml-sm" v-if="$q.screen.gt.xs">{{ userIdentity }}</div>
-    <q-btn class="q-ml-sm" flat round dense icon="account_circle">
-      <rb-user-menu
-        :identity="userIdentity"
-        @profile="onShowProfile"
-        @logout="onLogout"
+    <slot name="buttons">
+      <q-btn
+        flat
+        round
+        dense
+        icon="brightness_6"
+        @click="onDarkModeToggle"
       />
-    </q-btn>
+    </slot>
+
+    <slot name="userarea">
+      <div class="q-ml-sm" v-if="showIdentity && $q.screen.gt.sm">{{ userIdentity }}</div>
+      <q-btn class="q-ml-sm" flat round dense icon="account_circle">
+        <slot name="usermenu">
+          <rb-user-menu
+            :identity="userIdentity"
+            @profile="onShowProfile"
+            @logout="onLogout"
+          />
+        </slot>
+      </q-btn>
+    </slot>
   </q-toolbar>
 </template>
 
@@ -44,7 +58,8 @@ export default {
   },
 
   props: {
-    value: Boolean
+    value: Boolean,
+    showIdentity: Boolean
   },
 
   computed: {
