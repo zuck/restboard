@@ -1,15 +1,15 @@
 <template>
   <q-menu>
-    <q-list class="items-center" separator>
-      <q-item class="column items-center q-py-md q-px-xl">
-        <q-avatar size="80px">
-          <img src="~assets/logo.svg">
-        </q-avatar>
-        <div class="text-subtitle1 q-mt-sm q-mb-xs">
-          {{ identity }}
-        </div>
-      </q-item>
-
+    <div class="user-details column items-center q-pa-md">
+      <q-avatar size="80px">
+        <img src="~assets/logo.svg">
+      </q-avatar>
+      <div class="text-subtitle1 q-mt-sm q-mb-xs">
+        {{ identity }}
+      </div>
+    </div>
+    <q-separator />
+    <q-list separator>
       <q-item clickable @click="$emit('profile')">
         <q-item-section avatar>
           <q-icon name="info" class="faded" />
@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-.userarea
-  width: 180px
+<style scoped lang="sass">
+.user-details
+  min-width: 200px !important
 </style>
