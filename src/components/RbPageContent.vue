@@ -48,7 +48,8 @@ export default {
   computed: {
     headerCss () {
       return {
-        'bg-transparent': this.transparent
+        'bg-transparent': this.transparent,
+        'q-mb-md': true
       }
     }
   }
