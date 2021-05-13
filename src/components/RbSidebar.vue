@@ -12,7 +12,7 @@
       <q-item-section>{{ rootLinkLabel || $t('Dashboard') }}</q-item-section>
     </q-item>
     <rb-resource-menu
-      v-for="resource in resources"
+      v-for="resource in visibileResources"
       :resource="resource"
       :key="resource.name"
     />
@@ -32,6 +32,11 @@ export default {
     separator: Boolean,
     hideRootLink: Boolean,
     rootLinkLabel: String
+  },
+  computed: {
+    visibileResources () {
+      return this.resources.filter(resource => !resource.excludeSidebar)
+    }
   }
 }
 </script>
