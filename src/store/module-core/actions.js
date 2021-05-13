@@ -2,7 +2,22 @@ import {
   DEFAULT_LOCALE,
   AUTH_API_URL
 } from 'src/config'
-import createAuthProvider from 'rb-auth-provider-simple'
+
+// NOTE: uncomment and use this for a real authentication flow:
+// import createAuthProvider from 'rb-auth-provider-simple'
+
+const createAuthProvider = (url, opts) => Object.freeze({
+  login: async credentials => Object.assign({
+    data: {
+      id: 1,
+      email: credentials.email
+    }
+  }),
+  logout: async () => true,
+  checkAuth: async () => 'ok',
+  getIdentity: async user => 'Mario Rossi',
+  can: async (user, route) => true
+})
 
 const authProvider = createAuthProvider(AUTH_API_URL, {
   storage: {
